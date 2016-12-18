@@ -73,6 +73,25 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
         return targetTask;
     }
 
+    public taskEntry getTaskByOrder(int order){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(DATABASE_NAME,null,null,null,null,null,null);
+        int i =0;
+        if(cursor.getCount() <=order||order < 0||!cursor.moveToFirst()){db.close();return null;}
+        while(i < order){
+            i++;
+            cursor.moveToNext();
+        }
+        int thisId =  Integer.valueOf(cursor.getString(1)).intValue();
+        taskEntry targetTask = new taskEntry(cursor.getInt(2),cursor.getString(3),cursor.getInt(4),cursor.getInt(5),cursor.getString(6));
+        targetTask.setID(thisId);
+        cursor.close();//关闭结果集
+        db.close();//关闭数据库对象
+        return targetTask;
+
+
+    }
+
     //在数据库中删除指定id的taskEntry条目，并返回
     public taskEntry deleteTaskByID(int id){
         taskEntry delone = getTaskByID(id);

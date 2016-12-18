@@ -12,7 +12,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class CustomDialog extends Dialog {
@@ -43,6 +43,7 @@ public class CustomDialog extends Dialog {
         CheckBox level1=null;
         CheckBox level2=null;
         CheckBox level3=null;
+        EditText mycontext = null;
 
         public Builder(Context context) {
             this.context = context;
@@ -149,6 +150,7 @@ public class CustomDialog extends Dialog {
             level1=(CheckBox)layout.findViewById(R.id.dialogCheckBox7);
             level2=(CheckBox)layout.findViewById(R.id.dialogCheckBox8);
             level3=(CheckBox)layout.findViewById(R.id.dialogCheckBox9);
+            mycontext = (EditText)layout.findViewById(R.id.dialogEditText);
             typeYear.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView,
