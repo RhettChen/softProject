@@ -23,7 +23,7 @@ public class Main31Activity extends AppCompatActivity {
         ImageButton bt1 ;
         bt1 = (ImageButton)findViewById(R.id.activtiy31imageButton);
         bt3 = (Button)findViewById(R.id.activtiy31button3);
-        mytext = (TextView)findViewById(R.id.textView);
+        mytext = (TextView)findViewById(R.id.activity3textView1);
 
 
         bt1.setOnClickListener(new View.OnClickListener() {

@@ -22,17 +22,17 @@
         android:layout_toStartOf="@+id/activity3button2"
         android:layout_marginRight="21dp"
         android:layout_marginEnd="21dp"
-        android:background="@drawable/activity3_1_7"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:background="@drawable/activity3_1_7" />
 
     <Button
-        android:layout_width="30dp"
         android:layout_height="30dp"
         android:id="@+id/activity3button2"
-        android:background="@drawable/activity3_2_3"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/activity3_1_9"
+        android:layout_width="45dp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -44,56 +44,56 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/activity3_2_4"
             android:id="@+id/activity3imageView2"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/activity3_2_4" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/activity3_2_6"
             android:id="@+id/activity3imageView3"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/activity3_2_6" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/activity3_2_5"
             android:id="@+id/activity3imageView5"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/activity3_2_5" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/activity3_2_7"
             android:id="@+id/activity3imageView6"
             android:layout_alignTop="@+id/activity3imageView3"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/activity3_2_7" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/activity3_2_9"
             android:id="@+id/activity3imageView8"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/activity3_2_9" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/activity3_2_8"
             android:id="@+id/activity3imageView7"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/activity3_2_8" />
 
         <TextView
             android:text="TextView"
@@ -112,35 +112,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/activity3button4"
-        android:background="@drawable/activity3_2_10"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
+        android:background="@android:drawable/editbox_background"
         android:layout_alignTop="@+id/activity3button5" />
 
     <Button
         android:id="@+id/activity3button5"
-        android:background="@drawable/activity3_2_11"
         android:layout_height="30dp"
         android:layout_width="30dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="17dp"
-        android:layout_marginEnd="17dp" />
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/activity2_1_4" />
 
     <Button
         android:id="@+id/activity3button"
-        android:background="@drawable/activity3_2_1"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:visibility="visible"
-        android:elevation="0dp" />
+        android:elevation="0dp"
+        android:background="@drawable/activity2_1_2"
+        android:layout_width="45dp"
+        android:layout_height="45dp" />
 
 </RelativeLayout>
 
