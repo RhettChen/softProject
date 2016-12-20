@@ -10,15 +10,59 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="chenyiyan.timer.MainActivity">
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/button"
+        android:id="@+id/ListView01"
+        android:layout_below="@+id/button7" />
+
     <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:background="@drawable/activity2_1_2"
+        android:text=""
+        android:id="@+id/button7"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text=""
+        android:layout_width="60dp"
+        android:layout_height="120dp"
+        android:id="@+id/button3"
+        android:layout_below="@+id/button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="52dp"
-        android:id="@+id/button" />
+        android:layout_marginTop="11dp" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="60dp"
+        android:layout_height="120dp"
+        android:id="@+id/button8"
+        android:layout_below="@+id/button3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="60dp"
+        android:layout_height="120dp"
+        android:id="@+id/button2"
+        android:layout_below="@+id/button8"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:background="@drawable/activity2_1_1"
+        android:text=""
+        android:layout_width="60dp"
+        android:id="@+id/button"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>
