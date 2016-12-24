@@ -147,10 +147,10 @@ public class Main3Activity extends AppCompatActivity {
                 taskEntry[] taskList;
                 int length = 0;
                 taskList = new taskEntry[100];
-                taskEntry newOne = MainActivity.rewardUsedList.getTaskByCondition("type=?", new String[]{"31"},0);
+                taskEntry newOne = rewardUsedList.getTaskByCondition("type=?", new String[]{"31"},0);
                 while(newOne!=null){
                     taskList[length++] = newOne;
-                    newOne = MainActivity.rewardUsedList.getTaskByCondition("type=?", new String[]{"31"},length);
+                    newOne = rewardUsedList.getTaskByCondition("type=?", new String[]{"31"},length);
                 }
                 System.out.println("长度："+length);
                 historyBuilder = new HistoryList.Builder(Main3Activity.this,taskList,length,"过去所得奖励");

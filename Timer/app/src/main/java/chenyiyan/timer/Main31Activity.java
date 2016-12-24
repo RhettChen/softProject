@@ -35,8 +35,6 @@ public class Main31Activity extends AppCompatActivity implements OnGestureListen
 
         //往viewFlipper添加View
         viewFlipper.addView(getImageView(R.drawable.activity3_1_3));
-        viewFlipper.addView(getImageView(R.drawable.activity2_1_30));
-        viewFlipper.addView(getImageView(R.drawable.activity2_1_24));
         viewFlipper.addView(getImageView(R.drawable.activity3_1_7));
         viewFlipper.addView(getImageView(R.drawable.activity3_1_3));
         viewFlipper.addView(getImageView(R.drawable.activity2_1_3));
