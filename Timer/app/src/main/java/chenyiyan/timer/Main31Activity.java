@@ -1,31 +1,22 @@
 package chenyiyan.timer;
 
-import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.GestureDetector;
+import android.view.GestureDetector.OnGestureListener;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
-import android.view.MotionEvent;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ImageView;
 
 public class Main31Activity extends AppCompatActivity implements OnGestureListener {
     Button bt3;
+    Button bt2;
     TextView mytext;
     private ViewFlipper viewFlipper;
     private GestureDetector detector; //手势检测
@@ -34,6 +25,7 @@ public class Main31Activity extends AppCompatActivity implements OnGestureListen
     Animation leftOutAnimation;
     Animation rightInAnimation;
     Animation rightOutAnimation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +35,6 @@ public class Main31Activity extends AppCompatActivity implements OnGestureListen
 
         //往viewFlipper添加View
         viewFlipper.addView(getImageView(R.drawable.activity3_1_3));
-        viewFlipper.addView(getImageView(R.drawable.activity2_1_30));
-        viewFlipper.addView(getImageView(R.drawable.activity2_1_24));
         viewFlipper.addView(getImageView(R.drawable.activity3_1_7));
         viewFlipper.addView(getImageView(R.drawable.activity3_1_3));
         viewFlipper.addView(getImageView(R.drawable.activity2_1_3));
@@ -57,14 +47,22 @@ public class Main31Activity extends AppCompatActivity implements OnGestureListen
 
         ImageButton bt1 ;
         bt1 = (ImageButton)findViewById(R.id.activtiy31imageButton);
+        bt2 = (Button)findViewById(R.id.activity31button2);
         bt3 = (Button)findViewById(R.id.activtiy31button3);
-        mytext = (TextView)findViewById(R.id.activity3textView1);
+        //mytext = (TextView)findViewById(R.id.activity3textView1);
 
 
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                finish();
+            }
+        });
+
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -76,6 +74,8 @@ public class Main31Activity extends AppCompatActivity implements OnGestureListen
         });
 
     }
+
+
 
     private ImageView getImageView(int id){
         ImageView imageView = new ImageView(this);

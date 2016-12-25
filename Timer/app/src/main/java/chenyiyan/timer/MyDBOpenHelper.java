@@ -37,7 +37,7 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
     // 插入taskEntry类
-    public void insert(taskEntry newone){
+    public taskEntry insert(taskEntry newone){
         int mid;
         SQLiteDatabase db1 = this.getReadableDatabase();
         Cursor cur = db1.rawQuery("SELECT MAX(ID) FROM "+DATABASE_NAME, null);
@@ -49,7 +49,14 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
         db.execSQL("insert into " + DATABASE_NAME + "(item,type,context,finish,level,date) values(?,?,?,?,?,?)" , new Object[]{String.valueOf(mid),newone.getType(),newone.getContext(),newone.getFinish(),newone.getLevel(),newone.getDate()});
         db.close();
         newone.setID(mid);
-        System.out.println(mid);
+        return newone;
+    }
+
+    //返回数据库的大小
+    public int getCount(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(DATABASE_NAME,null,null,null,null,null,null);
+        return cursor.getCount();
     }
 
     //通过ID查找taskEntry类
@@ -90,6 +97,25 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
         return targetTask;
 
 
+    }
+   //通过selection参数按照条目满足的条件查找,order是满足条件第N个task
+    public taskEntry getTaskByCondition(String selection,String[] selectionArgs,int order){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int i = 1;
+
+        Cursor cursor = db.query(DATABASE_NAME,null,selection,selectionArgs,null,null,null);
+        if(cursor.getCount() < order || !cursor.moveToFirst()){
+            cursor.close();//关闭结果集
+            db.close();//关闭数据库对象
+            return null;
+        }
+        while(i < order){cursor.moveToNext();i++;}
+        int thisId =  Integer.valueOf(cursor.getString(1)).intValue();
+        taskEntry targetTask = new taskEntry(cursor.getInt(2),cursor.getString(3),cursor.getInt(4),cursor.getInt(5),cursor.getString(6));
+        targetTask.setID(thisId);
+        cursor.close();//关闭结果集
+        db.close();//关闭数据库对象
+        return targetTask;
     }
 
     //在数据库中删除指定id的taskEntry条目，并返回
