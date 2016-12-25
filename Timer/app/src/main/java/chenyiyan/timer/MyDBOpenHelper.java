@@ -135,13 +135,13 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
     }
 
     //将任务的finished条目设置为1
-    public taskEntry finishByID(int id){
+    public taskEntry finishByID(int id,int xx){
         SQLiteDatabase db = this.getWritableDatabase();
         taskEntry delone;
         //实例化内容值
         ContentValues values = new ContentValues();
         //在values中添加内容
-        values.put("finish",1);
+        values.put("finish",xx);
         //修改条件
         String whereClause = "item=?";
         //修改添加参数

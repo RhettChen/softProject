@@ -10,15 +10,94 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="chenyiyan.timer.MainActivity">
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toEndOf="@+id/button"
+        android:id="@+id/ListView01"
+        android:layout_below="@+id/button7" />
+
     <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="统计"
+        android:id="@+id/button7"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:text="新建"
+        android:layout_width="60dp"
+        android:id="@+id/button"
+        android:layout_height="60dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="奖励"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/button5"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/button"
+        android:layout_above="@+id/ListView01" />
+
+    <Button
+        android:text="设置"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_above="@+id/ListView01"
+        android:layout_toRightOf="@+id/button5"
+        android:layout_toEndOf="@+id/button5"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:id="@+id/button6"
+        android:layout_alignParentTop="true" />
+
+    <Button
+        android:background="@drawable/activity3_1_6"
+    android:text="日"
+    android:layout_width="60dp"
+    android:layout_height="100dp"
+    android:id="@+id/button2"
+        android:layout_below="@+id/button"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="52dp"
-        android:id="@+id/button" />
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:background="@drawable/activity3_1_6"
+        android:text="月"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:id="@+id/button0"
+        android:layout_below="@+id/button2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:background="@drawable/activity3_1_6"
+        android:text="周"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:id="@+id/button3"
+        android:layout_below="@+id/button0"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:background="@drawable/activity3_1_6"
+        android:text="年"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:id="@+id/button1"
+        android:layout_below="@+id/button3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>
