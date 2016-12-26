@@ -86,10 +86,10 @@
         android:layout_width="60dp"
         android:layout_height="100dp"
         android:id="@+id/button1"
-        android:layout_below="@+id/button3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/currentCredits" />
+        android:layout_above="@+id/currentCredits"
+        android:layout_below="@+id/button0" />
 
     <Button
         android:background="@drawable/activity3_1_6"
@@ -97,10 +97,9 @@
         android:layout_width="60dp"
         android:layout_height="100dp"
         android:id="@+id/button0"
-        android:layout_below="@+id/button2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="97dp" />
+        android:layout_below="@+id/button3" />
 
     <Button
         android:background="@drawable/activity3_1_6"
