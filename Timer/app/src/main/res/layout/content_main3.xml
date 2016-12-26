@@ -12,6 +12,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="chenyiyan.timer.Main3Activity"
     tools:showIn="@layout/activity_main3"
+    android:background="#BFEFFF"
     android:orientation="horizontal">
 
     <LinearLayout
