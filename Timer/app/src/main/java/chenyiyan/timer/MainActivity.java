@@ -340,15 +340,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 taskEntry handledOne = AnotherDialog.getTask();
                 int currentCredits = Integer.parseInt(keyValueList.getValueByKey("credits"));
-                if(handledOne.getCredit() < currentCredits){
                     taskList.deleteTaskByID(handledOne.getID());
                     taskUsedList.insert(handledOne);
                     currentCredits += handledOne.getCredit();
                     keyValueList.changeValueByKey("credits",""+currentCredits);
                     renewDisplay();
                     dialog.dismiss();
-                }
-                else  Toast.makeText(MainActivity.this,"所拥有积分不足", Toast.LENGTH_SHORT).show();
+
             }
         });
 
