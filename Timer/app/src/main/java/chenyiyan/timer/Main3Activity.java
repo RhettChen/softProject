@@ -53,7 +53,6 @@ public class Main3Activity extends AppCompatActivity {
         bt4 = (Button)findViewById(R.id.activity3button4);
         bt5 = (Button)findViewById(R.id.activity3button5);
         bt4 .setText(title);
-        keyValueList.changeValueByKey("credits",""+100);
         bt5.setText("当前积分："+keyValueList.getValueByKey("credits"));
         mylistView = (ListView)findViewById(R.id.activity3ListView1);
         bt1.setOnClickListener(new View.OnClickListener() {
