@@ -26,33 +26,82 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
     static MyDBOpenHelper taskList ;//= new MyDBOpenHelper(getContext(),"task",null,1);
+    static MyDBOpenHelper taskUsedList;
     MyDBOpenHelper rewardList; //= new MyDBOpenHelper(getContext(),"reward",null,1);
     static MyDBOpenHelper rewardUsedList;
     static MyEasyDataHelper keyValueList;
     CustomDialog.Builder builder;
     ListView list;
     int cursection=0;
+    Button creditsBtn;
+    CustomAnotherDialog.Builder AnotherDialog;
+    HistoryList.Builder historyBuilder;
     ArrayList<taskEntry>tasksnow;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        taskList = new MyDBOpenHelper(this,"task",null,1);
+        taskUsedList = new MyDBOpenHelper(this,"taskUsed",null,1);
+        rewardList = new MyDBOpenHelper(this,"reward",null,1);
+        rewardUsedList = new MyDBOpenHelper(this,"rewardUsed",null,1);
+        keyValueList = new MyEasyDataHelper(this,"keyValueList",null,1);
+        SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMdd");
+        String date= sDateFormat.format(new java.util.Date());
+        renewlist(date);
+        Intent intent = new Intent(MainActivity.this, pwdActivity.class);
+        intent.putExtra("isFromMain", true);
+        startActivity(intent);
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        taskList = new MyDBOpenHelper(this,"task",null,1);
-        rewardList = new MyDBOpenHelper(this,"reward",null,1);
-        rewardUsedList = new MyDBOpenHelper(this,"rewardUsed",null,1);
-        keyValueList = new MyEasyDataHelper(this,"keyValueList",null,1);
         list = (ListView) findViewById(R.id.ListView01);
 
         //生成动态数组，加入数据
+        creditsBtn = (Button)findViewById(R.id.currentCredits);
+        Button bt,bt6,bt7;
+        bt7 = (Button)findViewById(R.id.button7);
+        bt7.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                taskEntry[] taskList;
+                int length = 0;
+                int tmpLength = 0;
+                taskList = new taskEntry[100];
+                String[] type = new String[]{String.valueOf(cursection*10),String.valueOf(cursection*10+1)};
+                taskEntry newOne = taskUsedList.getTaskByCondition("type=?", new String[]{type[0]},0);
+                taskEntry newOne1 = taskUsedList.getTaskByCondition("type=?", new String[]{type[1]},0);
+                while(newOne!=null || newOne1!=null){
+                    if(newOne!=null)taskList[length++] = newOne;
+                    if(newOne1!=null)taskList[length++] = newOne1;
+                    tmpLength++;
+                    newOne = taskUsedList.getTaskByCondition("type=?", new String[]{type[0]},tmpLength);
+                    newOne1 = taskUsedList.getTaskByCondition("type=?", new String[]{type[1]},tmpLength);
+                }
+                System.out.println("长度："+length);
+                historyBuilder = new HistoryList.Builder(MainActivity.this,taskList,length,"过去所得奖励");
+                historyBuilder.create().show();
+            }
+        });
 
-        Button bt;
+        bt6 = (Button)findViewById(R.id.button6);
+        bt6.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(MainActivity.this, pwdActivity.class);
+                intent.putExtra("isFromMain", true);
+                intent.putExtra("setPwd", true);
+   //             myflag = true;
+
+                startActivity(intent);
+
+            }
+        });
         bt = (Button)findViewById(R.id.button5);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,12 +310,16 @@ public class MainActivity extends AppCompatActivity {
                 int arg2=position;
                 if (arg2>=tasksnow.size())
                     return true;
-                taskList.deleteTaskByID(tasksnow.get(arg2).id);
+                if(tasksnow.get(arg2).getFinish()==1){
+                    dialog1_1(tasksnow.get(arg2));
+                }
 
-                renewDisplay();
+               // renewDisplay();
                 return true;
             }
         });
+
+        creditsBtn.setText("当前积分："+keyValueList.getValueByKey("credits"));
         /*taskEntry addOne;
 
         bt5.setText(MainActivity.keyValueList.getValueByKey("credits"));
@@ -277,5 +330,91 @@ public class MainActivity extends AppCompatActivity {
             addOne = rewardList.getTaskByCondition("type=?",new String[]{"31"},showRewardLength+1);
         }
         renewDisplay(showReward,showRewardLength);*/
+    }
+
+    private void  dialog1_1(taskEntry aimed){
+        //先new出一个监听器，设置好监听
+        AnotherDialog=new CustomAnotherDialog.Builder(MainActivity.this,aimed);
+        AnotherDialog.setTitle("所需积分："+ aimed.getCredit());
+        AnotherDialog.setPositiveButton("兑换", new android.content.DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                taskEntry handledOne = AnotherDialog.getTask();
+                int currentCredits = Integer.parseInt(keyValueList.getValueByKey("credits"));
+                if(handledOne.getCredit() < currentCredits){
+                    taskList.deleteTaskByID(handledOne.getID());
+                    taskUsedList.insert(handledOne);
+                    currentCredits += handledOne.getCredit();
+                    keyValueList.changeValueByKey("credits",""+currentCredits);
+                    renewDisplay();
+                    dialog.dismiss();
+                }
+                else  Toast.makeText(MainActivity.this,"所拥有积分不足", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        AnotherDialog.setNegativeButton("取消",
+                new android.content.DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AnotherDialog.setNeutralButton("删除",
+                new android.content.DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        taskList.deleteTaskByID(AnotherDialog.getTask().getID());
+                        renewDisplay();
+                        dialog.dismiss();
+                    }
+                });
+
+        AnotherDialog.create().show();
+
+    }
+
+    public int percentageOfDailyTask(){
+        float taskUsed;
+        float taskIng;
+        int num;
+        String nowDate;
+        taskUsed = taskUsedList.numOfSection("type=?",new String[]{"1"})+taskUsedList.numOfSection("type=?",new String[]{"0"});
+        taskIng = taskList.numOfSection("type=?",new String[]{"1"})+taskUsedList.numOfSection("type=?",new String[]{"0"});
+        num = (int)((taskUsed/(taskIng+taskUsed))*100);
+        System.out.println("taskUsed "+taskUsed+"taskIng "+taskIng+"比例："+num);
+        return num;
+    }
+    private void renewlist(String date){
+        int i = 1;
+        taskEntry handleOne = taskList.getTaskByCondition("type=?",new String[]{"1"},i);
+        i++;
+        while(handleOne!=null){
+            if(date.compareTo(handleOne.getDate())!=0)taskList.renewDateById(handleOne.getID(),date);
+            handleOne = taskList.getTaskByCondition("type=?",new String[]{"1"},i);
+            i++;
+        }
+        i=1;
+        handleOne = taskList.getTaskByCondition("type=?",new String[]{"0"},i);
+        i++;
+        while(handleOne!=null){
+            if(date.compareTo(handleOne.getDate())!=0)taskList.deleteTaskByID(handleOne.getID());
+            handleOne = taskList.getTaskByCondition("type=?",new String[]{"0"},i);
+            i++;
+        }
+        i=1;
+        handleOne = taskUsedList.getTaskByCondition("type=?",new String[]{"1"},i);
+        i++;
+        while(handleOne!=null){
+            if(date.compareTo(handleOne.getDate())!=0)taskUsedList.deleteTaskByID(handleOne.getID());
+            handleOne = taskUsedList.getTaskByCondition("type=?",new String[]{"1"},i);
+            i++;
+        }
+        i=1;
+        handleOne = taskUsedList.getTaskByCondition("type=?",new String[]{"0"},i);
+        i++;
+        while(handleOne!=null){
+            if(date.compareTo(handleOne.getDate())!=0)taskUsedList.deleteTaskByID(handleOne.getID());
+            handleOne = taskUsedList.getTaskByCondition("type=?",new String[]{"0"},i);
+            i++;
+        }
     }
 }

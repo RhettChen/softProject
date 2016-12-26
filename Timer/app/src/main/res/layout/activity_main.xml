@@ -13,54 +13,56 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_toEndOf="@+id/button"
+        android:layout_toEndOf="@+id/button2"
         android:id="@+id/ListView01"
-        android:layout_below="@+id/button7" />
+        android:layout_alignTop="@+id/button2"
+        android:layout_above="@+id/currentCredits"
+        android:layout_toRightOf="@+id/button2" />
 
     <Button
-        android:text="统计"
         android:id="@+id/button7"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@android:drawable/presence_away"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 
     <Button
-        android:text="新建"
-        android:layout_width="60dp"
         android:id="@+id/button"
-        android:layout_height="60dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@android:drawable/ic_input_add"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 
     <Button
-        android:text="奖励"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
         android:layout_marginLeft="20dp"
         android:layout_marginStart="20dp"
         android:id="@+id/button5"
-        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/button"
-        android:layout_above="@+id/ListView01" />
+        android:layout_above="@+id/button2"
+        android:background="@drawable/activity3_1_3"
+        android:layout_alignParentTop="true"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 
     <Button
-        android:text="设置"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_above="@+id/ListView01"
         android:layout_toRightOf="@+id/button5"
         android:layout_toEndOf="@+id/button5"
         android:layout_marginLeft="18dp"
         android:layout_marginStart="18dp"
         android:id="@+id/button6"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/button5"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@android:drawable/ic_lock_lock" />
 
     <Button
         android:background="@drawable/activity3_1_6"
-    android:text="日"
+    android:text="日任务"
     android:layout_width="60dp"
     android:layout_height="100dp"
     android:id="@+id/button2"
@@ -71,7 +73,7 @@
 
     <Button
         android:background="@drawable/activity3_1_6"
-        android:text="月"
+        android:text="月任务"
         android:layout_width="60dp"
         android:layout_height="100dp"
         android:id="@+id/button0"
@@ -81,7 +83,7 @@
 
     <Button
         android:background="@drawable/activity3_1_6"
-        android:text="周"
+        android:text="周任务"
         android:layout_width="60dp"
         android:layout_height="100dp"
         android:id="@+id/button3"
@@ -90,14 +92,24 @@
         android:layout_alignParentStart="true" />
 
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/currentCredits"
+        android:background="@drawable/activity3_1_5"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
         android:background="@drawable/activity3_1_6"
-        android:text="年"
+        android:text="年任务"
         android:layout_width="60dp"
         android:layout_height="100dp"
         android:id="@+id/button1"
         android:layout_below="@+id/button3"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/currentCredits" />
 
 
 </RelativeLayout>

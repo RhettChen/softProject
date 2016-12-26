@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/my_timer"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -15,22 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".Main1Activity"
-            android:label="@string/title_activity_main1"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
+            android:name=".pwdActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Main3Activity"
             android:label="@string/title_activity_main3"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Main31Activity"
-            android:label="@string/title_activity_main31"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

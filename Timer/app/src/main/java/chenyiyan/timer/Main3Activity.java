@@ -34,16 +34,19 @@ public class Main3Activity extends AppCompatActivity {
     int targetReward;
     private ListView mylistView;
     Button bt1,bt2,bt3,bt4,bt5;
+    String[] type ;
+    String title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         rewardList = new MyDBOpenHelper(this,"reward",null,1);
         rewardUsedList = new MyDBOpenHelper(this,"rewardUsed",null,1);
         keyValueList = new MyEasyDataHelper(this,"keyValueList",null,1);
-        String title = "年度任务";
+        type = new String[2];
+        title = "年度奖励";
+        type[1] = "31";
+        type[0] = "30";
         bt1 = (Button)findViewById(R.id.activity3button);
         bt2 = (Button)findViewById(R.id.activity3button2);
         bt3 = (Button)findViewById(R.id.activity3button3);
@@ -51,7 +54,7 @@ public class Main3Activity extends AppCompatActivity {
         bt5 = (Button)findViewById(R.id.activity3button5);
         bt4 .setText(title);
         keyValueList.changeValueByKey("credits",""+100);
-        bt5.setText(keyValueList.getValueByKey("credits"));
+        bt5.setText("当前积分："+keyValueList.getValueByKey("credits"));
         mylistView = (ListView)findViewById(R.id.activity3ListView1);
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,11 +149,16 @@ public class Main3Activity extends AppCompatActivity {
             public void onClick(View view) {
                 taskEntry[] taskList;
                 int length = 0;
+                int tmpLength = 1;
                 taskList = new taskEntry[100];
-                taskEntry newOne = rewardUsedList.getTaskByCondition("type=?", new String[]{"31"},0);
-                while(newOne!=null){
-                    taskList[length++] = newOne;
-                    newOne = rewardUsedList.getTaskByCondition("type=?", new String[]{"31"},length);
+                taskEntry newOne = rewardUsedList.getTaskByCondition("type=?", new String[]{type[0]},1);
+                taskEntry newOne1 = rewardUsedList.getTaskByCondition("type=?", new String[]{type[1]},1);
+                while(newOne!=null || newOne1!=null){
+                    if(newOne!=null)taskList[length++] = newOne;
+                    if(newOne1!=null)taskList[length++] = newOne1;
+                    tmpLength++;
+                    newOne = rewardUsedList.getTaskByCondition("type=?", new String[]{type[0]},tmpLength);
+                    newOne1 = rewardUsedList.getTaskByCondition("type=?", new String[]{type[1]},tmpLength);
                 }
                 System.out.println("长度："+length);
                 historyBuilder = new HistoryList.Builder(Main3Activity.this,taskList,length,"过去所得奖励");
@@ -158,18 +166,17 @@ public class Main3Activity extends AppCompatActivity {
             }
         });
 
-
-
-    /*    texts[0].setOnClickListener(new View.OnClickListener() {
+        bt4.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
-                if(textFlags[0]==true){
-                    taskEntry current = showReward[0];
-                    dialog1_1(current);
-                    bt4.setText(MainActivity.keyValueList.getValueByKey("credits"));
+            public void onClick(View view) {
+                switch(type[0]){
+                    case "31":case "30":{type[0]="21";type[1]="20";title ="每月奖励";renewDisplay();break;}
+                    case "21":case "20":{type[0]="11";type[1]="10";title ="每周奖励";renewDisplay();break;}
+                    case "11":case "10":{type[0]="1";type[1]="0";title ="每日奖励";renewDisplay();break;}
+                    case "1":case "0":{type[0]="31";type[1]="30";title ="年度奖励";renewDisplay();break;}
                 }
             }
-        });*/
+        });
 
     }
 
@@ -214,13 +221,20 @@ public class Main3Activity extends AppCompatActivity {
     }
     private void renewDisplay(){
         taskEntry addOne;
+        taskEntry addOne1;
         System.out.println("调用renewDisplay()");
-        bt5.setText(MainActivity.keyValueList.getValueByKey("credits"));
+        bt4.setText(title);
+        bt5.setText("当前积分："+MainActivity.keyValueList.getValueByKey("credits"));
         showRewardLength = 0;
-        addOne=rewardList.getTaskByCondition("type=?",new String[]{"31"},showRewardLength+1);
-        while(addOne!=null){
-            showReward[showRewardLength++]=addOne;
-            addOne = rewardList.getTaskByCondition("type=?",new String[]{"31"},showRewardLength+1);
+        int templength = 0;
+        addOne=rewardList.getTaskByCondition("type=?",new String[]{type[0]},templength+1);
+        addOne1 = rewardList.getTaskByCondition("type=?",new String[]{type[1]},templength+1);;
+        while(addOne!=null || addOne1 != null){
+            if(addOne!=null)showReward[showRewardLength++]=addOne;
+            if(addOne1!=null)showReward[showRewardLength++]=addOne1;
+            templength++;
+            addOne = rewardList.getTaskByCondition("type=?",new String[]{type[0]},templength+1);
+            addOne1 = rewardList.getTaskByCondition("type=?",new String[]{type[1]},templength+1);
         }
         renewDisplay(showReward,showRewardLength);
     }
@@ -231,7 +245,8 @@ public class Main3Activity extends AppCompatActivity {
         for(int i = 0;i < Length; i++){
             HashMap<String,Object> map = new HashMap<String,Object>();
             map.put("Item1",null);
-            map.put("Item2",taskarray[i].getContext());
+            if(taskarray[i]!=null)map.put("Item2",taskarray[i].getContext());
+            else map.put("Item2",null);
             map.put("Item3",null);
             listItem.add(map);
         }
@@ -254,14 +269,16 @@ public class Main3Activity extends AppCompatActivity {
                                     long arg3) {
                 View view = mylistView.getChildAt(arg2);
                 targetReward = arg2;
+                dialog1_1(showReward[targetReward]);
                 Button btnFinish = (Button) view.findViewById(R.id.activity3ListViewButton2);
-                btnFinish.setOnClickListener(new View.OnClickListener() {
+                btnFinish.setBackground(getResources().getDrawable(R.drawable.activity2_1_5));
+               /* btnFinish.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         System.out.println("在这里");
                         dialog1_1(showReward[targetReward]);
                     }
-                });
+                });*/
 
                 }
             });

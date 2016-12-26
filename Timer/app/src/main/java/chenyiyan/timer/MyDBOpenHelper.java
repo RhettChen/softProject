@@ -103,8 +103,8 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         int i = 1;
 
-        Cursor cursor = db.query(DATABASE_NAME,null,selection,selectionArgs,null,null,null);
-        if(cursor.getCount() < order || !cursor.moveToFirst()){
+        Cursor cursor = db.query(DATABASE_NAME,null,selection,selectionArgs,null,null,null,null);
+        if(cursor==null || cursor.getCount() < order || !cursor.moveToFirst()){
             cursor.close();//关闭结果集
             db.close();//关闭数据库对象
             return null;
@@ -142,6 +142,42 @@ public class MyDBOpenHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         //在values中添加内容
         values.put("finish",xx);
+        //修改条件
+        String whereClause = "item=?";
+        //修改添加参数
+        String[] whereArgs={String.valueOf(id)};
+        //修改
+        db.update(DATABASE_NAME,values,whereClause,whereArgs);
+        db.close();
+        delone = getTaskByID(id);
+        return delone;
+    }
+
+    public int numOfSection(String selection,String[] selectionArgs){
+        SQLiteDatabase db = this.getReadableDatabase();
+        int num = 0;
+        int i = 1;
+
+        Cursor cursor = db.query(DATABASE_NAME,null,selection,selectionArgs,null,null,null,null);
+        if(cursor==null  || !cursor.moveToFirst()){
+            cursor.close();//关闭结果集
+            db.close();//关闭数据库对象
+            return num;
+        }
+        num = cursor.getCount();
+        cursor.close();//关闭结果集
+        db.close();//关闭数据库对象
+        return num;
+
+    }
+
+    public taskEntry renewDateById(int id,String xx){
+        SQLiteDatabase db = this.getWritableDatabase();
+        taskEntry delone;
+        //实例化内容值
+        ContentValues values = new ContentValues();
+        //在values中添加内容
+        values.put("date",xx);
         //修改条件
         String whereClause = "item=?";
         //修改添加参数
