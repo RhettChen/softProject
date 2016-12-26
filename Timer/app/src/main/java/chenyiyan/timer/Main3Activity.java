@@ -17,7 +17,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//import android.icu.text.SimpleDateFormat;
 
 public class Main3Activity extends AppCompatActivity {
 
